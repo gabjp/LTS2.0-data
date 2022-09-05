@@ -1,0 +1,7 @@
+data/GALAXY_S82_iDR4.fits  
+data/STAR_S82_iDR4.fits
+data/QSO_S82_iDR4.fits
+data/clf/clf_fits/**
+data/clf/clf.csv
+data/clf/__pycache__
+.spyproject/
