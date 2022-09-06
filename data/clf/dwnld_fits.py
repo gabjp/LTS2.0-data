@@ -39,6 +39,8 @@ def main():
 
     paths = [Path('./clf_fits') / band / f'{_id}.fits' for _id in ids]
 
+    print(len(paths))
+
     service.batch_image_download_ms(
       ra=ra,
       dec=dec,
