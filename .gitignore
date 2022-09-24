@@ -1,8 +1,11 @@
 data/clf/raw_tables/**
 data/clf/clf_fits/**
-data/clf/.pynb_checkpoints/**
+data/clf/.ipynb_checkpoints/**
 data/clf/__pycache__/**
 data/clf/all_objects/**
 data/clf/clf.csv
 data/clf/iDR4_zero-points.csv
 .spyproject/
+data/unl/raw_tables/**
+data/unl/.ipynb_checkpoints/**
+data/unl/unl.csv

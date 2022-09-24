@@ -1,0 +1,16 @@
+SELECT TOP 3308 det.id, det.ra, det.dec, det.fwhm_n, g.g_iso, i.i_iso, j0378.j0378_iso, j0395.j0395_iso, j0410.j0410_iso, j0430.j0430_iso, j0515.j0515_iso, j0660.j0660_iso, j0861.j0861_iso, r.r_iso, r.e_r_iso, u.u_iso, z.z_iso, r.sex_flags_r
+FROM idr4_dual.idr4_detection_image as det
+INNER JOIN idr4_dual.idr4_dual_g as g ON g.id=det.id
+INNER JOIN idr4_dual.idr4_dual_i as i ON i.id=det.id
+INNER JOIN idr4_dual.idr4_dual_j0378 as j0378 ON j0378.id=det.id
+INNER JOIN idr4_dual.idr4_dual_j0395 as j0395 ON j0395.id=det.id
+INNER JOIN idr4_dual.idr4_dual_j0410 as j0410 ON j0410.id=det.id
+INNER JOIN idr4_dual.idr4_dual_j0430 as j0430 ON j0430.id=det.id
+INNER JOIN idr4_dual.idr4_dual_j0515 as j0515 ON j0515.id=det.id
+INNER JOIN idr4_dual.idr4_dual_j0660 as j0660 ON j0660.id=det.id
+INNER JOIN idr4_dual.idr4_dual_j0861 as j0861 ON j0861.id=det.id
+INNER JOIN idr4_dual.idr4_dual_r as r ON r.id=det.id
+INNER JOIN idr4_dual.idr4_dual_u as u ON u.id=det.id
+INNER JOIN idr4_dual.idr4_dual_z as z ON z.id=det.id
+WHERE g.g_iso != 99 and  i.i_iso != 99 and j0378.j0378_iso != 99 and j0395.j0395_iso != 99 and j0410.j0410_iso != 99 and j0430.j0430_iso != 99 and j0515.j0515_iso != 99 and j0660.j0660_iso != 99 and j0861.j0861_iso != 99 and r.r_iso != 99 and u.u_iso != 99 and z.z_iso != 99 and r.r_iso > 15 and r.r_iso <=16 and r.sex_flags_r = 0
+
