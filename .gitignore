@@ -9,3 +9,6 @@ data/clf/iDR4_zero-points.csv
 data/unl/raw_tables/**
 data/unl/.ipynb_checkpoints/**
 data/unl/unl.csv
+data/.ipynb_checkpoints/**
+data/unl/unl_fits
+data/unl/__pycache__
