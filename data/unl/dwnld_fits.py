@@ -2,7 +2,7 @@ from pathlib import Path
 from spluslib import SplusService, ImageType
 import pandas as pd
 
-df = pd.read_csv('unl.csv')
+df = pd.read_csv('unl_small.csv')
 
 bands = [
   'R', 'I', 'F861', 'Z', 'G', 'F515', 'F660',

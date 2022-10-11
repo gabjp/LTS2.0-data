@@ -12,3 +12,5 @@ data/unl/unl.csv
 data/.ipynb_checkpoints/**
 data/unl/unl_fits
 data/unl/__pycache__
+data/unl/unl_big.csv
+data/unl/unl_small.csv
