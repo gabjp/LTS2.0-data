@@ -14,3 +14,5 @@ data/unl/unl_fits
 data/unl/__pycache__
 data/unl/unl_big.csv
 data/unl/unl_small.csv
+data/unl/all_objects/**
+data/unl/iDR4_zero-points.csv
