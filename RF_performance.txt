@@ -1,0 +1,32 @@
+Avaliando: Treinado em train avaliado em val
+              precision    recall  f1-score   support
+
+           0   0.847834  0.903583  0.874821      2707
+           1   0.963113  0.933399  0.948023      8168
+           2   0.966070  0.973933  0.969986      9092
+
+    accuracy                       0.947814     19967
+   macro avg   0.925672  0.936972  0.930943     19967
+weighted avg   0.948831  0.947814  0.948099     19967
+
+Avaliando: Treinado em train avaliado em test
+              precision    recall  f1-score   support
+
+           0   0.835805  0.886746  0.860523      4512
+           1   0.961915  0.931868  0.946653     13606
+           2   0.962355  0.971883  0.967096     15151
+
+    accuracy                       0.943972     33269
+   macro avg   0.920025  0.930166  0.924757     33269
+weighted avg   0.945012  0.943972  0.944282     33269
+
+Avaliando: Treinado em train+val avaliado em test
+              precision    recall  f1-score   support
+
+           0   0.836947  0.889628  0.862484      4512
+           1   0.962831  0.932897  0.947628     13606
+           2   0.962917  0.971751  0.967314     15151
+
+    accuracy                       0.944723     33269
+   macro avg   0.920898  0.931425  0.925808     33269
+weighted avg   0.945798  0.944723  0.945046     33269
