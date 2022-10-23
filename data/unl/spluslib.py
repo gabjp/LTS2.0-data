@@ -37,7 +37,7 @@ BASE_URL = 'https://splus.cloud/api/'
 LOGIN_ROUTE = 'auth/login'
 LUPTON_ROUTE = 'get_lupton_image/{ra}/{dec}/{size}/{r_band}/{g_band}/{b_band}/{stretch}/{Q}'
 TRILOGY_ROUTE = 'get_image/{ra}/{dec}/{size}/{r_band}-{g_band}-{b_band}/{noise}/{saturation}'
-FITS_ROUTE = 'get_cut/{ra}/{dec}/{size}/{band}'
+FITS_ROUTE = 'get_cut/{ra}/{dec}/{size}/{band}/1'
 PUBLIC_TAP_ROUTE = '/public-TAP/tap/async/?request=doQuery&version=1.0&lang=ADQL&phase=run&query={sql}&format={fmt}'
 PRIVATE_TAP_ROUTE = '/tap/tap/async/?request=doQuery&version=1.0&lang=ADQL&phase=run&query={sql}&format={fmt}'
 
@@ -64,11 +64,12 @@ def download_file(
     save_path.parent.mkdir(parents=True, exist_ok=True)
 
   r = http_client.get(url, allow_redirects=True)
-
   if extract:
     file_bytes = bz2.decompress(r.content)
   else:
     file_bytes = r.content
+
+  print(save_path.resolve())
 
   with open(str(save_path.resolve()), 'wb') as f:
     f.write(file_bytes)
@@ -612,7 +613,6 @@ class SplusService:
     # Stage 1 request
     url = self._get_url(route, kwargs)
     resp = self.client.get(url)
-
     if resp.status_code == 200:
       if 'application/json' in resp.headers['Content-Type']:
         resp_body = resp.json()

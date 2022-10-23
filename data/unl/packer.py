@@ -7,9 +7,14 @@ from cv2 import resize, INTER_CUBIC
 import multiprocessing
 from os.path import exists
 
-ids = pd.read_csv("unl_small.csv").ID
+csv_name = "unl_small_noise.csv"
+fits_folder = "unl_fits/64gb"
+
+
+missing = []
+df = pd.read_csv()
+ids = df.ID
 zps = pd.read_csv("iDR4_zero-points.csv")
-fits_folder = "/media/gjperin/64gb"
 bands = ["U",
              "F378",
              "F395",
@@ -48,6 +53,11 @@ def gather_bands(id):
     mat = []
     for band in bands:
         #print(f'{fits_folder}/{band}/{id}.fits')
+
+        if not exists(f'{fits_folder}/{band}/{id}.fits'):
+            missing.append(id)
+            return
+
         x = fits.open(f'{fits_folder}/{band}/{id}.fits')[1].data
         x = resize(x, dsize=(32, 32), interpolation=INTER_CUBIC)
         x = calibrate(x,id,band)
@@ -59,3 +69,6 @@ with multiprocessing.Pool(multiprocessing.cpu_count()) as pool:
     with tqdm.tqdm(total=len(ids)) as pbar:
             for _ in pool.imap_unordered(gather_bands, ids):
                 pbar.update(1)
+
+
+df = df[~(df.ID.isin(missing))]

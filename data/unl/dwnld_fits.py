@@ -2,12 +2,13 @@ from pathlib import Path
 from spluslib import SplusService, ImageType
 import pandas as pd
 
-df = pd.read_csv('unl_small.csv')
-
+df = pd.read_csv('unl_small_noise.csv')
+df = df[df.ID == 'iDR4_3_STRIPE82-0004_0013352']
 bands = [
   'R', 'I', 'F861', 'Z', 'G', 'F515', 'F660',
   'U', 'F378', 'F395', 'F410', 'F430'
 ]
+print(df)
 
 """
 Ordem correta:  [u_iso,
