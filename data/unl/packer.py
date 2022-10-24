@@ -7,12 +7,10 @@ from cv2 import resize, INTER_CUBIC
 import multiprocessing
 from os.path import exists
 
-csv_name = "unl_small_noise.csv"
-fits_folder = "unl_fits/64gb"
+csv_name = "raw_fits/unl_small_noise.csv"
+fits_folder = "unl_fits"
 
-
-missing = []
-df = pd.read_csv()
+df = pd.read_csv(csv_name)
 ids = df.ID
 zps = pd.read_csv("iDR4_zero-points.csv")
 bands = ["U",
@@ -41,20 +39,25 @@ band_to_zp = {"U":"ZP_u",
             "Z":"ZP_z"
         }
     
+manager = multiprocessing.Manager()
+missing = manager.list()
+lock = multiprocessing.Lock()
+
 def calibrate(x,id,band):
     ps = 0.55
     zp = float(zps[zps["Field"]==id[7:20]][band_to_zp[band]])
     return (10**(5-0.4*zp)/(ps*ps))*x
 
 def gather_bands(id):
-    if exists(f"all_objects/{id}.npy"):
+    if exists(f"raw_fits/all_objects/{id}.npy"):
         return 
 
     mat = []
     for band in bands:
         #print(f'{fits_folder}/{band}/{id}.fits')
-
-        if not exists(f'{fits_folder}/{band}/{id}.fits'):
+        global missing, lock
+        fits_file = f'{fits_folder}/{band}/{id}.fits'
+        if not exists(fits_file) or os.path.getsize(fits_file)<17000:
             missing.append(id)
             return
 
@@ -62,7 +65,7 @@ def gather_bands(id):
         x = resize(x, dsize=(32, 32), interpolation=INTER_CUBIC)
         x = calibrate(x,id,band)
         mat.append(x)
-    np.save(f"all_objects/{id}.npy", np.array(mat))
+    np.save(f"raw_fits/all_objects/{id}.npy", np.array(mat))
 
 
 with multiprocessing.Pool(multiprocessing.cpu_count()) as pool:
@@ -70,5 +73,7 @@ with multiprocessing.Pool(multiprocessing.cpu_count()) as pool:
             for _ in pool.imap_unordered(gather_bands, ids):
                 pbar.update(1)
 
-
-df = df[~(df.ID.isin(missing))]
+print(len(missing))
+df = df[~(df.ID.isin(list(missing)))]
+df.to_csv(csv_name)
+print(len(df))
