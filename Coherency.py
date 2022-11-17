@@ -23,7 +23,7 @@ _feat = ['u_iso',
              'J0861_iso',
              'z_iso']
 
-data = pd.read_csv("data/clf/clf.csv")
+data = pd.read_csv("clf_90_5_5_brk.csv")
 
 train = data[(data.split=="train")]
 val = data[data.split=="val"]

@@ -17,3 +17,6 @@ data/unl/unl_small.csv
 data/unl/all_objects/**
 data/unl/iDR4_zero-points.csv
 data/unl/unl_small_noise.csv
+data/clf/clf_90_5_5.csv
+clf_90_5_5_brk.csv
+playground/**
